@@ -16,6 +16,10 @@ properties:
     - name: telegram-webhook
       properties:
         image: ghcr.io/cubbadub/openclaw-telegram-webhook:latest
+        imageRegistryCredentials:
+          - server: ghcr.io
+            username: cubbadub
+            password: "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"
         ports:
           - port: 443
         environmentVariables:
