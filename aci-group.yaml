@@ -1,0 +1,34 @@
+apiVersion: 2021-09-01
+location: westus
+name: openclaw-group
+properties:
+  containers:
+    - name: openclaw
+      properties:
+        image: ghcr.io/openclaw/openclaw:latest
+        ports:
+          - port: 18789
+        resources:
+          requests:
+            cpu: 2
+            memoryInGb: 4
+    - name: telegram-webhook
+      properties:
+        image: <YOUR_IMAGE_HERE>
+        ports:
+          - port: 443
+        environmentVariables:
+          - name: TELEGRAM_TOKEN
+            value: "<YOUR_TELEGRAM_TOKEN>"
+        resources:
+          requests:
+            cpu: 1
+            memoryInGb: 1
+  ipAddress:
+    type: Public
+    ports:
+      - protocol: TCP
+        port: 443
+    dnsNameLabel: openclawagent
+  osType: Linux
+resourceGroup: openclaw-rg
